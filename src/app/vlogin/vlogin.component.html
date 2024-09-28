@@ -1,0 +1,53 @@
+<ngx-spinner bdColor="rgba(0, 0, 0, 0.8)" size="large" color="#fff" type="ball-atom" [fullScreen]="true">
+    <p style="color: white"> Loading... </p>
+</ngx-spinner>
+<form [formGroup]="profileForm">
+    <div class="container py-4">
+        <div class="row g-0 align-items-center">
+            <div class="col-lg-6 mb-5 mb-lg-0">
+                <div class="card cascading-right" style="
+            background: hsla(0, 0%, 100%, 0.55);
+            backdrop-filter: blur(30px);width: 101%;
+            ">
+                    <div class="card-body p-5 shadow-5 text-center">
+                        <div class="d-flex justify-content-center align-items-center">
+                        <img src="./assets/tvslogo.png" alt="tvslogo" style="height: 25px;">
+                        </div>
+                        <br/>
+                        <div class="row">
+                            <!-- Email input -->
+                            <div class="form-outline mb-4">
+                                <input type="text" formControlName="VCode" class="form-control" placeholder="Vendor Id"
+                                    autocomplete="off" required>
+                                <!-- <label class="form-label" for="form3Example3">Email address</label> -->
+                            </div>
+
+                            <!-- Password input -->
+                            <div class="form-outline mb-4">
+                                <input type="password" formControlName="password" class="form-control"
+                                    placeholder="Password" autocomplete="off" required>
+                                <!-- <label class="form-label" for="form3Example4">Password</label> -->
+                            </div>
+
+
+                            <!-- Submit button -->
+
+                            <button type="submit" class="btn btn-primary btn-block mb-4"
+                            (click)='home()'  >Login</button><br><br>
+
+                            <div class="d-flex justify-content-center align-items-center">
+                                <span style="text-align: center;">Use Vendor Credential</span>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-6 mb-5 mb-lg-0">
+                <!-- https://mdbootstrap.com/img/new/ecommerce/vertical/004.jpg -->
+                <img src="./assets/LoginImage.jpg" class="w-100 rounded-4 shadow-4" style="height:600px;" alt="" />
+            </div>
+        </div>
+    </div>
+</form>

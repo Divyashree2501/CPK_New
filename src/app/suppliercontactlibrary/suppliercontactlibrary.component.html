@@ -1,0 +1,633 @@
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<nav class="navbar navbar-expand-lg " style="background-color:#40c2ff">
+    <div class="container-fluid">
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo03"
+            aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+
+                <li class="nav-item" style="padding-top:10px;">
+                    <button type="button" style="border-radius:4px"><img src="./assets/tvslogo.png" alt=""
+                            style="width:45px"> </button>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" style="color:white ;font-size:18px;padding-left:500px;">Supplier Contact
+                        Details</a>
+                </li>
+
+            </ul>
+
+            <div class="row">
+
+                <div class="col-lg-4"></div>
+
+                <div class="col-lg-4">
+                    <button type="button" class="navButton" (click)="logout()">
+
+                        <i class="fa fa-sign-out" style="color: #fff;
+                     
+                        padding: 0;
+                        font-size: 18px;
+                       "></i>Logout</button>
+
+
+
+                    <!-- <button type="button" class="navButton" routerLink="/home"><i class="fa fa-home" style="color: #fff;
+         
+               padding: 0;
+               font-size: 18px"></i>Home</button> -->
+                </div>
+
+                <div class="col-lg-4">
+
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+</nav>
+<div class="transitCreate">
+
+    <div class="row mlr-0">
+        <div class="col-lg-12 col-sm-12 col-md-12 col-xs-12 plr-0">
+            <div class="transitCreateTop">
+                <form style="margin-top: 1%;" [formGroup]="profileForm">
+                    <div class="basicheading">
+                        <div class="sectionHeader">Basic Detail</div>
+
+
+                        <div class="row" style="margin-bottom:2% ">
+                            <div class="col-lg-6">
+                                <div class="row">
+
+
+                                    <div class="col-lg-6">
+                                        <label class="label" style="padding-bottom:1%;" required>Vendor Id</label>
+                                        <input readonly class="form-control" formControlName="VendorId">
+
+                                    </div>
+
+                                    <div class="col-lg-6">
+                                        <label class="label" required>Vendor Name</label>
+                                        <input readonly class="form-control" formControlName="VendorName">
+
+                                    </div>
+
+                                </div>
+                            </div>
+
+
+                            <div class="col-lg-6">
+                                <div class="row">
+
+                                    <div class="col-lg-6">
+                                        <label class="label" required>Vendor Category </label>
+                                        <input readonly class="form-control" formControlName="VendorCategory">
+
+                                    </div>
+
+                                    <div class="col-lg-6">
+
+                                        <label class="label" required>Production House </label>
+                                        <mat-select class="input-control" formControlName="ProductionHouse">
+                                            <mat-option value=""> Select</mat-option>
+                                            <mat-option value=" Production House"> Production House</mat-option>
+                                            <mat-option value="Warehouse"> Warehouse</mat-option>
+                                        </mat-select>
+
+
+                                    </div>
+
+
+
+                                </div>
+                            </div>
+
+
+                        </div>
+                        <div class="row" style="margin-bottom:2% ">
+                            <div class="col-lg-6">
+                                <div class="row">
+
+
+
+                                    <div class="col-lg-6">
+                                        <label class="label" style="padding-bottom:1%;" required>Vendor Address </label>
+                                        <input class="form-control" formControlName="VendorAddress">
+
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <label class="label" style="padding-bottom:1%;" required>Pin Code </label>
+                                        <input class="form-control" formControlName="PinCode">
+
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <div class="col-lg-6">
+                                <div class="row">
+
+                                    <div class="col-lg-6">
+                                        <label class="label" style="padding-bottom:1%;" required>Landline Phone
+                                            No</label>
+                                        <input class="form-control" formControlName="LandlinePhoneNo">
+
+                                    </div>
+
+                                    <div class="col-lg-6">
+                                        <label class="label" style="padding-bottom:1%;" required>VC IP Address</label>
+                                        <input class="form-control" formControlName="VCIPAddress">
+
+                                    </div>
+
+
+                                </div>
+                            </div>
+
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="basicheading">
+                        <div class="sectionHeader">Supplier CEO</div>
+                        <div class="row" style="margin-bottom:10px;padding-left:10%">
+
+
+                            <div class="col-lg-3">
+                                <label class="label" style="padding-bottom:1%;" required>Name</label>
+
+                                <span class="input-group-text" style="padding-right:9%; width: 10px"><i
+                                        class="fa fa-user"></i></span>
+                                <input type="text" class="input-grouptwo" placeholder="User name"
+                                    formControlName="SupplierCEOName">
+                            </div>
+                            <div class="col-lg-3">
+                                <label class="label" style="padding-bottom:1%;" required>Email Id</label>
+
+                                <span class="input-group-text" style="padding-right: 9%; width: 10px"><i
+                                        class="fa fa-envelope" aria-hidden="true"></i></span>
+                                <input type="text" class="input-grouptwo" placeholder="abc@example.com"
+                                    formControlName="SupplierCEOEmailId">
+
+
+
+
+                            </div>
+                            <div class="col-lg-3">
+
+                                <label class="label" style="padding-bottom:1%;" required>Phone Number</label>
+
+                                <span class="input-group-text" style="padding-right: 9%; width: 10px"><i
+                                        class="fa fa-phone" aria-hidden="true"></i></span>
+                                <input type="text" class="input-grouptwo" placeholder="Phone Number"
+                                    formControlName="SupplierCEOPhoneNo" maxlength="10" (keypress)="numberOnly($event)">
+
+                            </div>
+
+
+                        </div>
+                    </div>
+                    <div class="basicheading">
+                        <div class="sectionHeader">Marketing head/Business Head</div>
+                        <div class="row" style="margin-bottom:10px;padding-left:10%;">
+                            <h4 mat-dialog-title style="color: #0a58ca;">
+                            </h4>
+
+                            <div class="col-lg-3">
+                                <label class="label" style="padding-bottom:1%;" required>Name</label>
+
+                                <span class="input-group-text" style="padding-right:9%; width: 10px"><i
+                                        class="fa fa-user"></i></span>
+                                <input type="text" class="input-grouptwo" placeholder="User name"
+                                    formControlName="BusinessheadName">
+                            </div>
+                            <div class="col-lg-3">
+                                <label class="label" style="padding-bottom:1%;" required>Email Id</label>
+
+                                <span class="input-group-text" style="padding-right: 9%; width: 10px"><i
+                                        class="fa fa-envelope" aria-hidden="true"></i></span>
+                                <input type="text" class="input-grouptwo" placeholder="abc@example.com"
+                                    formControlName="BusinessheadEmailId">
+
+                            </div>
+                            <div class="col-lg-3">
+
+                                <label class="label" style="padding-bottom:1%;" required>Phone Number</label>
+
+                                <span class="input-group-text" style="padding-right: 9%; width: 10px"><i
+                                        class="fa fa-phone" aria-hidden="true"></i></span>
+                                <input type="text" class="input-grouptwo" placeholder="Phone Number"
+                                    formControlName="BusinessheadPhoneNo" maxlength="10"
+                                    (keypress)="numberOnly($event)">
+
+                            </div>
+
+
+                        </div>
+                    </div>
+                    <div class="basicheading">
+                        <div class="sectionHeader">Marketing First level</div>
+                        <div class="row" style="margin-bottom:10px;padding-left:10%">
+
+
+                            <div class="col-lg-3">
+                                <label class="label" style="padding-bottom:1%;" required>Name</label>
+
+                                <span class="input-group-text" style="padding-right:9%; width: 10px"><i
+                                        class="fa fa-user"></i></span>
+                                <input type="text" class="input-grouptwo" placeholder="User name"
+                                    formControlName="MarketingFirstName">
+                            </div>
+                            <div class="col-lg-3">
+                                <label class="label" style="padding-bottom:1%;" required>Email Id</label>
+
+                                <span class="input-group-text" style="padding-right: 9%; width: 10px"><i
+                                        class="fa fa-envelope" aria-hidden="true"></i></span>
+                                <input type="text" class="input-grouptwo" placeholder="abc@example.com"
+                                    formControlName="MarketingFirstEmailId">
+
+                            </div>
+                            <div class="col-lg-3">
+
+                                <label class="label" style="padding-bottom:1%;" required>Phone Number</label>
+
+                                <span class="input-group-text" style="padding-right: 9%; width: 10px"><i
+                                        class="fa fa-phone" aria-hidden="true"></i></span>
+                                <input type="text" class="input-grouptwo" placeholder="Phone Number"
+                                    formControlName="MarketingFirstPhoneNo" maxlength="10"
+                                    (keypress)="numberOnly($event)">
+
+                            </div>
+
+
+                        </div>
+
+
+
+
+                    </div>
+
+                    <div class="basicheading">
+                        <div class="sectionHeader">Plant Head </div>
+                        <div class="row" style="margin-bottom:10px;padding-left:10%">
+
+
+                            <div class="col-lg-3">
+                                <label class="label" style="padding-bottom:1%;" required>Name</label>
+
+                                <span class="input-group-text" style="padding-right:9%; width: 10px"><i
+                                        class="fa fa-user"></i></span>
+                                <input type="text" class="input-grouptwo" placeholder="User name"
+                                    formControlName="PlantheadName">
+                            </div>
+                            <div class="col-lg-3">
+                                <label class="label" style="padding-bottom:1%;" required>Email Id</label>
+
+                                <span class="input-group-text" style="padding-right: 9%; width: 10px"><i
+                                        class="fa fa-envelope" aria-hidden="true"></i></span>
+                                <input type="text" class="input-grouptwo" placeholder="abc@example.com"
+                                    formControlName="PlantheadEmailId">
+
+                            </div>
+                            <div class="col-lg-3">
+
+                                <label class="label" style="padding-bottom:1%;" required>Phone Number</label>
+
+                                <span class="input-group-text" style="padding-right: 9%; width: 10px"><i
+                                        class="fa fa-phone" aria-hidden="true"></i></span>
+                                <input type="text" class="input-grouptwo" placeholder="Phone Number"
+                                    formControlName="PlantheadPhoneNo" maxlength="10" (keypress)="numberOnly($event)">
+
+                            </div>
+
+
+                        </div>
+                    </div>
+                    <div class="basicheading">
+                        <div class="sectionHeader">Quality Head </div>
+                        <div class="row" style="margin-bottom:10px;padding-left:10%">
+
+                            <div class="col-lg-3">
+                                <label class="label" style="padding-bottom:1%;" required>Name</label>
+
+                                <span class="input-group-text" style="padding-right:9%; width: 10px"><i
+                                        class="fa fa-user"></i></span>
+                                <input type="text" class="input-grouptwo" placeholder="User name"
+                                    formControlName="QualityheadName">
+                            </div>
+                            <div class="col-lg-3">
+                                <label class="label" style="padding-bottom:1%;" required>Email Id</label>
+
+                                <span class="input-group-text" style="padding-right: 9%; width: 10px"><i
+                                        class="fa fa-envelope" aria-hidden="true"></i></span>
+                                <input type="text" class="input-grouptwo" placeholder="abc@example.com"
+                                    formControlName="QualityheadEmailId">
+
+                            </div>
+                            <div class="col-lg-3">
+
+                                <label class="label" style="padding-bottom:1%;" required>Phone Number</label>
+
+                                <span class="input-group-text" style="padding-right: 9%; width: 10px"><i
+                                        class="fa fa-phone" aria-hidden="true"></i></span>
+                                <input type="text" class="input-grouptwo" placeholder="Phone Number"
+                                    formControlName="QualityheadPhoneNo" maxlength="10" (keypress)="numberOnly($event)">
+
+                            </div>
+
+
+                        </div>
+                    </div>
+                    <div class="basicheading">
+                        <div class="sectionHeader"> NPD Head</div>
+                        <div class="row" style="margin-bottom:10px;padding-left:10%">
+
+
+                            <div class="col-lg-3">
+                                <label class="label" style="padding-bottom:1%;" required>Name</label>
+
+                                <span class="input-group-text" style="padding-right:9%; width: 10px"><i
+                                        class="fa fa-user"></i></span>
+                                <input type="text" class="input-grouptwo" placeholder="User name"
+                                    formControlName="NPDHeadName">
+                            </div>
+                            <div class="col-lg-3">
+                                <label class="label" style="padding-bottom:1%;" required>Email Id</label>
+
+                                <span class="input-group-text" style="padding-right: 9%; width: 10px"><i
+                                        class="fa fa-envelope" aria-hidden="true"></i></span>
+                                <input type="text" class="input-grouptwo" placeholder="abc@example.com"
+                                    formControlName="NPDHeadEmailId">
+
+                            </div>
+                            <div class="col-lg-3">
+
+                                <label class="label" style="padding-bottom:1%;" required>Phone Number</label>
+
+                                <span class="input-group-text" style="padding-right: 9%; width: 10px"><i
+                                        class="fa fa-phone" aria-hidden="true"></i></span>
+                                <input type="text" class="input-grouptwo" placeholder="Phone Number"
+                                    formControlName="NPDHeadPhoneNo" maxlength="10" (keypress)="numberOnly($event)">
+
+                            </div>
+
+
+                        </div>
+
+
+
+
+                    </div>
+
+                    <div class="basicheading">
+                        <div class="sectionHeader">Finance First Level</div>
+                        <div class="row" style="margin-bottom:10px;padding-left:10%">
+
+
+                            <div class="col-lg-3">
+                                <label class="label" style="padding-bottom:1%;padding-left:10%" required>Name</label>
+
+                                <span class="input-group-text" style="padding-right:9%; width: 10px"><i
+                                        class="fa fa-user"></i></span>
+                                <input type="text" class="input-grouptwo" placeholder="User name"
+                                    formControlName="FinanceFirstName">
+                            </div>
+                            <div class="col-lg-3">
+                                <label class="label" style="padding-bottom:1%;" required>Email Id</label>
+
+                                <span class="input-group-text" style="padding-right: 9%; width: 10px"><i
+                                        class="fa fa-envelope" aria-hidden="true"></i></span>
+                                <input type="text" class="input-grouptwo" placeholder="abc@example.com"
+                                    formControlName="FinanceFirstEmailId">
+
+                            </div>
+                            <div class="col-lg-3">
+
+                                <label class="label" style="padding-bottom:1%;" required>Phone Number</label>
+
+                                <span class="input-group-text" style="padding-right: 9%; width: 10px"><i
+                                        class="fa fa-phone" aria-hidden="true"></i></span>
+                                <input type="text" class="input-grouptwo" placeholder="Phone Number"
+                                    formControlName="FinanceFirstPhoneNo" maxlength="10"
+                                    (keypress)="numberOnly($event)">
+
+                            </div>
+
+
+                        </div>
+
+
+
+
+                    </div>
+
+
+
+                    <div class="basicheading">
+                        <div class="sectionHeader">Quality First Level</div>
+                        <div class="row" style="margin-bottom:10px;padding-left:10%">
+
+
+                            <div class="col-lg-3">
+                                <label class="label" style="padding-bottom:1%;" required>Name</label>
+
+                                <span class="input-group-text" style="padding-right:9%; width: 10px"><i
+                                        class="fa fa-user"></i></span>
+                                <input type="text" class="input-grouptwo" placeholder="User name"
+                                    formControlName="QualityFirstheadName">
+                            </div>
+                            <div class="col-lg-3">
+                                <label class="label" style="padding-bottom:1%;" required>Email Id</label>
+
+                                <span class="input-group-text" style="padding-right: 9%; width: 10px"><i
+                                        class="fa fa-envelope" aria-hidden="true"></i></span>
+                                <input type="text" class="input-grouptwo" placeholder="abc@example.com"
+                                    formControlName="QualityFirstEmailId">
+
+                            </div>
+                            <div class="col-lg-3">
+
+                                <label class="label" style="padding-bottom:1%;" required>Phone Number</label>
+
+                                <span class="input-group-text" style="padding-right: 9%; width: 10px"><i
+                                        class="fa fa-phone" aria-hidden="true"></i></span>
+                                <input type="text" class="input-grouptwo" placeholder="Phone Number"
+                                    formControlName="QualityFirstPhoneNo" maxlength="10"
+                                    (keypress)="numberOnly($event)">
+
+                            </div>
+
+
+                        </div>
+
+
+
+
+                    </div>
+
+                    <div class="basicheading">
+                        <div class="sectionHeader">Dispatch First Level</div>
+                        <div class="row" style="margin-bottom:10px;padding-left:10%">
+
+
+                            <div class="col-lg-3">
+                                <label class="label" style="padding-bottom:1%;" required>Name</label>
+
+                                <span class="input-group-text" style="padding-right:9%; width: 10px"><i
+                                        class="fa fa-user"></i></span>
+                                <input type="text" class="input-grouptwo" placeholder="User name"
+                                    formControlName="DispatchFirstName">
+                            </div>
+                            <div class="col-lg-3">
+                                <label class="label" style="padding-bottom:1%;" required>Email Id</label>
+
+                                <span class="input-group-text" style="padding-right: 9%; width: 10px"><i
+                                        class="fa fa-envelope" aria-hidden="true"></i></span>
+                                <input type="text" class="input-grouptwo" placeholder="abc@example.com"
+                                    formControlName="DispatchFirstEmailId">
+
+                            </div>
+                            <div class="col-lg-3">
+
+                                <label class="label" style="padding-bottom:1%;" required>Phone Number</label>
+
+                                <span class="input-group-text" style="padding-right: 9%; width: 10px"><i
+                                        class="fa fa-phone" aria-hidden="true"></i></span>
+                                <input type="text" class="input-grouptwo" placeholder="Phone Number"
+                                    formControlName="DispatchFirstPhoneNo" maxlength="10"
+                                    (keypress)="numberOnly($event)">
+
+                            </div>
+
+
+                        </div>
+
+
+
+
+                    </div>
+                    <div class="basicheading">
+                        <div class="sectionHeader"> IT Head </div>
+                        <div class="row" style="margin-bottom:10px;padding-left:10%">
+
+
+                            <div class="col-lg-3">
+                                <label class="label" style="padding-bottom:1%;" required> IT Head Name</label>
+
+                                <span class="input-group-text" style="padding-right:9%; width: 10px"><i
+                                        class="fa fa-user"></i></span>
+                                <input type="text" class="input-grouptwo" placeholder="User name"
+                                    formControlName="ITHeadName">
+                            </div>
+                            <div class="col-lg-3">
+                                <label class="label" style="padding-bottom:1%;" required> IT Head Email ID</label>
+
+                                <span class="input-group-text" style="padding-right: 9%; width: 10px"><i
+                                        class="fa fa-envelope" aria-hidden="true"></i></span>
+                                <input type="text" class="input-grouptwo" placeholder="abc@example.com"
+                                    formControlName="ITHeadEmailId">
+
+                            </div>
+                            <div class="col-lg-3">
+
+                                <label class="label" style="padding-bottom:1%;" required> IT Head Mobile No</label>
+
+                                <span class="input-group-text" style="padding-right: 9%; width: 10px"><i
+                                        class="fa fa-phone" aria-hidden="true"></i></span>
+                                <input type="text" class="input-grouptwo" placeholder="Phone Number"
+                                    formControlName="ITHeadPhoneNo" maxlength="10" (keypress)="numberOnly($event)">
+
+                            </div>
+
+
+                        </div>
+
+
+
+
+                    </div>
+
+
+                    <div class="basicheading">
+                        <div class="sectionHeader">Head ERM/HR</div>
+                        <div class="row" style="margin-bottom:10px;padding-left:10%">
+
+
+                            <div class="col-lg-3">
+                                <label class="label" style="padding-bottom:1%;" required>Head ERM/HR Name</label>
+
+                                <span class="input-group-text" style="padding-right:9%; width: 10px"><i
+                                        class="fa fa-user"></i></span>
+                                <input type="text" class="input-grouptwo" placeholder="User name"
+                                    formControlName="HeadERMName">
+                            </div>
+                            <div class="col-lg-3">
+                                <label class="label" style="padding-bottom:1%;" required>EMail ID - ERM/HR Head</label>
+
+                                <span class="input-group-text" style="padding-right: 9%; width: 10px"><i
+                                        class="fa fa-envelope" aria-hidden="true"></i></span>
+                                <input type="text" class="input-grouptwo" placeholder="abc@example.com"
+                                    formControlName="HeadERMEmailId">
+
+                            </div>
+                            <div class="col-lg-3">
+
+                                <label class="label" style="padding-bottom:1%;" required>Head ERM/HR Mobile No</label>
+
+                                <span class="input-group-text" style="padding-right: 9%; width: 10px"><i
+                                        class="fa fa-phone" aria-hidden="true"></i></span>
+                                <input type="text" class="input-grouptwo" placeholder="Phone Number"
+                                    formControlName="HeadERMPhoneNo" maxlength="10" (keypress)="numberOnly($event)">
+
+                            </div>
+
+
+                        </div>
+
+
+
+
+                    </div>
+
+
+
+
+                <!-- </form> -->
+
+                <div class="d-flex justify-content-center align-items-center" style="padding-top:5%;">
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <button type="submit" class="btn btn-success" (click)='btnSubmit()'>Submit</button>
+                            
+                        </div>
+                        <div class="col-lg-6">
+                            <!-- <input readonly type="text"  formControlName="ModifiedDate"> -->
+                            <label class="label" style="padding-bottom:1%;" required>Last Update On</label>
+
+                            <span class="input-group-text" style="padding-right:15%; width: 20px"><i
+                                    class="fa fa-calendar"></i></span>
+                            <input type="text" readonly class="input-grouptwo" 
+                                formControlName="ModifiedDate">
+                        </div>
+                    </div>
+                </div>
+            </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<!-- <div class="input-group">
+    <span class="input-group-text"> <i class="fa fa-user"></i> </span>
+    <input type="text" class="form-control" placeholder="Username" aria-describedby="basic-addon1">
+</div> -->

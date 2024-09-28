@@ -1,0 +1,554 @@
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<nav class="navbar navbar-expand-lg " style="background-color: #3f51b5">
+  <div class="container-fluid">
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" 
+    data-bs-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03"
+     aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    
+    <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
+
+      <button type="button" style="border-radius:4px"><img src="./assets/tvslogo.png" alt="" style="width:45px">  </button>
+      <a class="navbar-brand" style="padding-left:40%;color:#f9f9fc;padding-bottom:1%"> Supplier CPK </a>
+    
+      <div class="row" style="padding-left:10%">
+
+        <div class="col-lg-2"> </div>
+        <div class="col-lg-2">
+          <button type="button" class="navButton" > <img src="./assets/data-processing.png" alt=""  (click)='DataEntry1()'
+            style="width:22px;padding-bottom:3px;"> LotData
+          
+        </button>
+       
+        </div>
+
+        <div class="col-lg-2">
+          <button type="button" class="navButton" > <img src="./assets/calendar.png" alt="" routerLink="/dailyreport"
+            style="width:22px;padding-bottom:3px;"> Daily
+          
+        </button>
+        </div>
+        <div class="col-lg-2">
+          <button type="button" class="navButton" > <img src="./assets/profit.png" alt=""  routerLink="/monthlyreport"
+              style="width:22px;padding-bottom:3px;"> Monthly
+            
+          </button>
+        </div>
+       
+       
+          <div class="col-lg-2">
+
+            <button type="button" class="navButton" routerLink="/vlogin"><i class="fa fa-sign-out" style="color: rgb(248, 244, 244);
+           
+              padding-bottom:0px;
+              font-size: 17px;
+             "></i>Logout</button>
+       
+        </div>
+
+        <div class="col-lg-2">
+
+          <button type="button" class="navButton" routerLink="/home"><i class="fa fa-home" style="color: rgb(248, 244, 244);
+         
+            padding: 0;
+            font-size: 17px;
+           "></i>Home</button>
+      
+      
+       
+      </div>
+
+      </div>
+
+      
+    </div>
+  </div>
+</nav>
+<div class="transitCreate">
+
+  <div class="row mlr-0">
+    <div class="col-lg-12 col-sm-12 col-md-12 col-xs-12 plr-0">
+      <div class="transitCreateTop">
+<form [formGroup]="profileForm" style="margin-top: 1%;">
+  <div class="d-flex justify-content-center align-items-center">
+    <div class="row">
+      <div class="col">
+        <h4 mat-dialog-title style="color: #0a58ca;
+        font-weight: bold;
+        font-size: 20px;">Daily Report
+        </h4>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-lg-6">
+      <div class="row">
+
+        <div class="col-lg-3">
+          
+        </div>
+        <div class="col-lg-3">
+         
+        </div>
+
+        <div class="col-lg-3">
+          <label class="label"  style="padding-bottom:1%;" required>Select Part</label>
+          <ng-multiselect-dropdown [placeholder]="'Select Part'" [data]="drpserver" [settings]="drpserversetting" style="height:48px"
+        name="Part" (onSelect)="onItemSelect($event)" (onDeSelect)="onDeSelect($event)" required>
+      </ng-multiselect-dropdown>
+        
+        </div>
+        <div class="col-lg-3">
+          <label class="label" required>From Date</label>
+          <mat-form-field appearance="outline"  style="width:100%;height:70%" >
+           
+            <input matInput [matDatepicker]="picker3" class="form-Control"  formControlName="datefrom" required>
+            <mat-datepicker-toggle matSuffix [for]="picker3"></mat-datepicker-toggle>
+            <mat-datepicker #picker3></mat-datepicker>
+          </mat-form-field>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="col-lg-6">
+      <div class="row">
+
+        <div class="col-lg-3">
+          <label class="label" required>To Date</label>
+          <mat-form-field appearance="outline"  style="width:100%;height:70%"  >
+           
+            <input matInput [matDatepicker]="picker4" class="form-Control" formControlName="dateto" required>
+            <mat-datepicker-toggle matSuffix [for]="picker4"></mat-datepicker-toggle>
+            <mat-datepicker #picker4></mat-datepicker>
+          </mat-form-field>
+       
+        </div>
+
+        <div class="col-lg-3" style="padding-top: 19px;">
+          <button type="submit" class="btn btn-primary" (click)='GetLot()'>Get Details</button>
+        </div>
+
+        <div class="col-lg-3" >
+          
+        </div>
+
+
+
+        <div class="col-lg-3" >
+
+        </div>
+      </div>
+    </div>
+
+
+  </div>
+
+  <!-- <div class="container">
+    <div class="card">
+      <div class="card-body">
+        <div class="d-flex justify-content-center align-items-center">
+          <div class="row">
+           
+
+            <div class="col" style="width:200px">
+              <ng-multiselect-dropdown [placeholder]="'Select Part'" [data]="drpserver" [settings]="drpserversetting"
+                name="Part" (onSelect)="onItemSelect($event)" (onDeSelect)="onDeSelect($event)" required>
+              </ng-multiselect-dropdown>
+            </div>
+
+            <div class="col">
+              <mat-form-field appearance="outline" style="width: 100%;">
+                <mat-label>From Date</mat-label>
+                <input matInput [matDatepicker]="picker3" class="form-Control" formControlName="datefrom" required>
+                <mat-datepicker-toggle matSuffix [for]="picker3"></mat-datepicker-toggle>
+                <mat-datepicker #picker3></mat-datepicker>
+              </mat-form-field>
+            </div>
+            <div class="col">
+              <mat-form-field appearance="outline" style="width: 100%;">
+                <mat-label>To Date</mat-label>
+                <input matInput [matDatepicker]="picker4" class="form-Control" formControlName="dateto" required>
+                <mat-datepicker-toggle matSuffix [for]="picker4"></mat-datepicker-toggle>
+                <mat-datepicker #picker4></mat-datepicker>
+              </mat-form-field>
+            </div>
+          </div>
+        </div>
+        <div class="d-flex justify-content-center align-items-center">
+          <button type="submit" class="btn btn-primary" (click)='GetLot()'>Get Details</button>
+        </div>
+      </div>
+    </div>
+  </div> -->
+</form>
+
+<div class="d-flex justify-content-left align-items-left" *ngIf="showbtn" style="margin-left: 1%;">
+  <button type="submit" class="btn btn-warning" (click)='Export()'>Export</button>
+</div>
+<br />
+<div class="example-container" *ngIf="dataSourceShow">
+  <table mat-table [dataSource]="dataSourceMain" class="mat-elevation-z8">
+    <ng-container matColumnDef="Position">
+      <th mat-header-cell *matHeaderCellDef> SNo. </th>
+      <td mat-cell *matCellDef="let element;let i = index"> {{i+1}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="ST_DATE">
+      <th mat-header-cell *matHeaderCellDef> Start Date </th>
+      <td mat-cell *matCellDef="let element">
+        {{element.ST_DATE}}
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="END_DATE">
+      <th mat-header-cell *matHeaderCellDef> End Date </th>
+      <td mat-cell *matCellDef="let element">
+        {{element.END_DATE}}
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="MATNR">
+      <th mat-header-cell *matHeaderCellDef> Material No.</th>
+      <td mat-cell *matCellDef="let element">
+        {{element.MATNR}}
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="MAKTX">
+      <th mat-header-cell *matHeaderCellDef> Material Desc. </th>
+      <td mat-cell *matCellDef="let element">
+        {{element.MAKTX}}
+      </td>
+    </ng-container>
+
+    <!-- <ng-container matColumnDef="DRW_ISSUE">
+        <th mat-header-cell *matHeaderCellDef> Drawing Issue </th>
+        <td mat-cell *matCellDef="let element">
+          {{element.DRW_ISSUE}}
+        </td>
+      </ng-container>
+  
+      <ng-container matColumnDef="DRW_REVISION">
+        <th mat-header-cell *matHeaderCellDef> Drawing Rev. </th>
+        <td mat-cell *matCellDef="let element">
+          {{element.DRW_REVISION}}
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="PROD_PLAN">
+        <th mat-header-cell *matHeaderCellDef> Production Line </th>
+        <td mat-cell *matCellDef="let element">
+          {{element.PROD_PLAN}}
+        </td>
+      </ng-container> 
+    <ng-container matColumnDef="VORGLFNR">
+      <th mat-header-cell *matHeaderCellDef> Opn. Code </th>
+      <td mat-cell *matCellDef="let element">
+        {{element.VORGLFNR}}
+      </td>
+    </ng-container>-->
+
+
+    <ng-container matColumnDef="LTXA1">
+      <th mat-header-cell *matHeaderCellDef> Opn. Desc </th>
+      <td mat-cell *matCellDef="let element">
+        {{element.LTXA1}}
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="MERKNR">
+      <th mat-header-cell *matHeaderCellDef> Char. ID </th>
+      <td mat-cell *matCellDef="let element">
+        {{element.MERKNR}}
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="KURZTEXT">
+      <th mat-header-cell *matHeaderCellDef> Char. Desc </th>
+      <td mat-cell *matCellDef="let element">
+        {{element.KURZTEXT}}
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="LSL">
+      <th mat-header-cell *matHeaderCellDef> LSL </th>
+      <td mat-cell *matCellDef="let element">
+        {{element.LSL}}
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="USL">
+      <th mat-header-cell *matHeaderCellDef> USL </th>
+      <td mat-cell *matCellDef="let element">
+        {{element.USL}}
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="MASSEINHSW">
+      <th mat-header-cell *matHeaderCellDef> UOM </th>
+      <td mat-cell *matCellDef="let element">
+        {{element.MASSEINHSW}}
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="D_CAT">
+      <th mat-header-cell *matHeaderCellDef> Dim. Category </th>
+      <td mat-cell *matCellDef="let element">
+        {{element.D_CAT}}
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="C_CAT">
+      <th mat-header-cell *matHeaderCellDef> Char. Category </th>
+      <td mat-cell *matCellDef="let element">
+        {{element.C_CAT}}
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="LCL">
+      <th mat-header-cell *matHeaderCellDef> LCL </th>
+      <td mat-cell *matCellDef="let element">
+        {{element.LCL}}
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="UCL">
+      <th mat-header-cell *matHeaderCellDef> UCL </th>
+      <td mat-cell *matCellDef="let element">
+        {{element.UCL}}
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="WK_D1">
+      <th mat-header-cell *matHeaderCellDef> 1 </th>
+      <td mat-cell *matCellDef="let element">
+        {{element.WK_D1}}
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="WK_D2">
+      <th mat-header-cell *matHeaderCellDef> 2 </th>
+      <td mat-cell *matCellDef="let element">
+        {{element.WK_D2}}
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="WK_D3">
+      <th mat-header-cell *matHeaderCellDef> 3 </th>
+      <td mat-cell *matCellDef="let element">
+        {{element.WK_D3}}
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="WK_D4">
+      <th mat-header-cell *matHeaderCellDef> 4 </th>
+      <td mat-cell *matCellDef="let element">
+        {{element.WK_D4}}
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="WK_D5">
+      <th mat-header-cell *matHeaderCellDef> 5 </th>
+      <td mat-cell *matCellDef="let element">
+        {{element.WK_D5}}
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="WK_D6">
+      <th mat-header-cell *matHeaderCellDef> 6 </th>
+      <td mat-cell *matCellDef="let element">
+        {{element.WK_D6}}
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="WK_D7">
+      <th mat-header-cell *matHeaderCellDef> 7 </th>
+      <td mat-cell *matCellDef="let element">
+        {{element.WK_D7}}
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="WK_D8">
+      <th mat-header-cell *matHeaderCellDef> 8 </th>
+      <td mat-cell *matCellDef="let element">
+        {{element.WK_D8}}
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="WK_D9">
+      <th mat-header-cell *matHeaderCellDef> 9 </th>
+      <td mat-cell *matCellDef="let element">
+        {{element.WK_D9}}
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="WK_D10">
+      <th mat-header-cell *matHeaderCellDef> 10 </th>
+      <td mat-cell *matCellDef="let element">
+        {{element.WK_D10}}
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="WK_D11">
+      <th mat-header-cell *matHeaderCellDef> 11 </th>
+      <td mat-cell *matCellDef="let element">
+        {{element.WK_D11}}
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="WK_D12">
+      <th mat-header-cell *matHeaderCellDef> 12 </th>
+      <td mat-cell *matCellDef="let element">
+        {{element.WK_D12}}
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="WK_D13">
+      <th mat-header-cell *matHeaderCellDef> 13 </th>
+      <td mat-cell *matCellDef="let element">
+        {{element.WK_D13}}
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="WK_D14">
+      <th mat-header-cell *matHeaderCellDef> 14 </th>
+      <td mat-cell *matCellDef="let element">
+        {{element.WK_D14}}
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="WK_D15">
+      <th mat-header-cell *matHeaderCellDef> 15 </th>
+      <td mat-cell *matCellDef="let element">
+        {{element.WK_D15}}
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="WK_D16">
+      <th mat-header-cell *matHeaderCellDef> 16 </th>
+      <td mat-cell *matCellDef="let element">
+        {{element.WK_D16}}
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="WK_D17">
+      <th mat-header-cell *matHeaderCellDef> 17 </th>
+      <td mat-cell *matCellDef="let element">
+        {{element.WK_D17}}
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="WK_D18">
+      <th mat-header-cell *matHeaderCellDef> 18 </th>
+      <td mat-cell *matCellDef="let element">
+        {{element.WK_D18}}
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="WK_D19">
+      <th mat-header-cell *matHeaderCellDef> 19 </th>
+      <td mat-cell *matCellDef="let element">
+        {{element.WK_D19}}
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="WK_D20">
+      <th mat-header-cell *matHeaderCellDef> 20 </th>
+      <td mat-cell *matCellDef="let element">
+        {{element.WK_D20}}
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="WK_D21">
+      <th mat-header-cell *matHeaderCellDef> 21 </th>
+      <td mat-cell *matCellDef="let element">
+        {{element.WK_D21}}
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="WK_D22">
+      <th mat-header-cell *matHeaderCellDef> 22 </th>
+      <td mat-cell *matCellDef="let element">
+        {{element.WK_D22}}
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="WK_D23">
+      <th mat-header-cell *matHeaderCellDef> 23 </th>
+      <td mat-cell *matCellDef="let element">
+        {{element.WK_D23}}
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="WK_D24">
+      <th mat-header-cell *matHeaderCellDef> 24 </th>
+      <td mat-cell *matCellDef="let element">
+        {{element.WK_D24}}
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="WK_D25">
+      <th mat-header-cell *matHeaderCellDef> 25 </th>
+      <td mat-cell *matCellDef="let element">
+        {{element.WK_D25}}
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="WK_D26">
+      <th mat-header-cell *matHeaderCellDef> 26 </th>
+      <td mat-cell *matCellDef="let element">
+        {{element.WK_D26}}
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="WK_D27">
+      <th mat-header-cell *matHeaderCellDef> 27 </th>
+      <td mat-cell *matCellDef="let element">
+        {{element.WK_D27}}
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="WK_D28">
+      <th mat-header-cell *matHeaderCellDef> 28 </th>
+      <td mat-cell *matCellDef="let element">
+        {{element.WK_D28}}
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="WK_D29">
+      <th mat-header-cell *matHeaderCellDef> 29 </th>
+      <td mat-cell *matCellDef="let element">
+        {{element.WK_D29}}
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="WK_D30">
+      <th mat-header-cell *matHeaderCellDef> 30 </th>
+      <td mat-cell *matCellDef="let element">
+        {{element.WK_D30}}
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="WK_D31">
+      <th mat-header-cell *matHeaderCellDef> 31 </th>
+      <td mat-cell *matCellDef="let element">
+        {{element.WK_D31}}
+      </td>
+    </ng-container>
+
+    <!-- <ng-container matColumnDef="header">
+      <th mat-header-cell *matHeaderCellDef [attr.colspan]="47" style="text-align: left!important;"> Inspection LOT
+        Details
+      </th>
+    </ng-container>
+    <tr mat-header-row *matHeaderRowDef="['header'];sticky:true"></tr> -->
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns;sticky:true"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+</div>
+</div></div></div></div>
+<br>
+

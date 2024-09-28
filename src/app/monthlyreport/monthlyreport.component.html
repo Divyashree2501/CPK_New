@@ -1,0 +1,663 @@
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<nav class="navbar navbar-expand-lg " style="background-color: #3f51b5">
+  <div class="container-fluid">
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" 
+    data-bs-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03"
+     aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    
+    <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
+
+      <button type="button" style="border-radius:4px"
+         ><img src="./assets/tvslogo.png" alt="" style="width:45px">  </button>
+      <a class="navbar-brand"   style="padding-left:40%;color: #f9f9fc;padding-bottom:1%"> Supplier CPK </a>
+    
+      <div class="row" style="padding-left:10%">
+
+        <div class="col-lg-2"> </div>
+        <div class="col-lg-2">
+          <button type="button" class="navButton" > <img src="./assets/data-processing.png" alt=""  (click)='DataEntry1()'
+            style="width:22px;padding-bottom:3px;"> LotData
+          
+        </button>
+       
+        </div>
+
+        <div class="col-lg-2">
+          <button type="button" class="navButton" > <img src="./assets/calendar.png" alt="" routerLink="/dailyreport"
+            style="width:22px;padding-bottom:3px;"> Daily
+          
+        </button>
+        </div>
+        <div class="col-lg-2">
+          <button type="button" class="navButton" > <img src="./assets/profit.png" alt=""  routerLink="/monthlyreport"
+              style="width:22px;padding-bottom:3px;"> Monthly
+            
+          </button>
+        </div>
+       
+       
+     
+      
+
+        
+          <div class="col-lg-2">
+
+            <button type="button" class="navButton" routerLink="/vlogin"><i class="fa fa-sign-out" style="color: rgb(248, 244, 244);
+           
+              padding:3px;
+              font-size: 17px;
+             "></i>Logout</button>
+        
+        
+         
+        </div>
+
+        <div class="col-lg-2">
+
+          <button type="button" class="navButton" routerLink="/home"><i class="fa fa-home" style="color: rgb(248, 244, 244);
+         
+            padding:3px;
+            font-size: 17px;
+           "></i>Home</button>
+      
+      
+       
+      </div>
+
+      </div>
+
+      
+    </div>
+  </div>
+</nav>
+<ngx-spinner bdColor="rgba(0, 0, 0, 0.8)" size="large" color="#fff" type="ball-atom" [fullScreen]="true">
+    <p style="color: white"> Loading... </p>
+</ngx-spinner>
+
+<div class="transitCreate">
+
+  <div class="row mlr-0">
+    <div class="col-lg-12 col-sm-12 col-md-12 col-xs-12 plr-0">
+      <div class="transitCreateTop">
+
+
+
+<form [formGroup]="profileForm" style="margin-top: 1%;">
+
+
+    <div class="d-flex justify-content-center align-items-center">
+        <div class="row">
+            <div class="col">
+                <h4 mat-dialog-title style="color: #0a58ca;
+          font-weight: bold;
+          font-size: 20px;">Monthly Report
+                </h4>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+      <div class="col-lg-6">
+        <div class="row">
+
+          <div class="col-lg-3">
+            
+          </div>
+          <div class="col-lg-3">
+           
+          </div>
+
+          <div class="col-lg-3">
+            <label class="label"  style="padding-bottom:1%;" required>Select Part</label>
+            <ng-multiselect-dropdown [placeholder]="'Select Part'" [data]="drpserver"
+            [settings]="drpserversetting" name="Part" (onSelect)="onItemSelect($event)"
+            (onDeSelect)="onDeSelect($event)" required>
+        </ng-multiselect-dropdown>
+          
+          </div>
+          <div class="col-lg-3">
+            <label class="label" required>From Date</label>
+            <mat-form-field appearance="outline" style="width:100%;height:70%">
+             
+              <input matInput [matDatepicker]="picker3" class="form-Control"
+                  formControlName="datefrom" required>
+              <mat-datepicker-toggle matSuffix [for]="picker3"></mat-datepicker-toggle>
+              <mat-datepicker #picker3></mat-datepicker>
+          </mat-form-field>
+          </div>
+        </div>
+      </div>
+
+
+      <div class="col-lg-6">
+        <div class="row">
+
+          <div class="col-lg-3">
+            <label class="label" required>To Date</label>
+            <mat-form-field appearance="outline" style="width:100%;height:70%">
+            
+              <input matInput [matDatepicker]="picker4" class="form-Control" formControlName="dateto"
+                  required>
+              <mat-datepicker-toggle matSuffix [for]="picker4"></mat-datepicker-toggle>
+              <mat-datepicker #picker4></mat-datepicker>
+          </mat-form-field>
+         
+          </div>
+
+          <div class="col-lg-3" style="padding-top: 19px;">
+            <button type="submit" class="btn btn-primary" (click)='GetLot()'>Get Details</button>
+          </div>
+
+          <div class="col-lg-3" >
+            
+          </div>
+
+
+
+          <div class="col-lg-3" >
+
+          </div>
+        </div>
+      </div>
+
+
+    </div>
+ 
+    
+</form>
+<br />
+<div class="d-flex justify-content-left align-items-left" *ngIf="showbtn" style="margin-left: 1%;">
+    <button type="submit" class="btn btn-warning" (click)='Export()'>Export</button>
+</div>
+<br />
+<div class="example-container" *ngIf="dataSourceShow">
+    <table mat-table [dataSource]="dataSourceMain" class="mat-elevation-z8">
+        <ng-container *ngFor="let column of columns" matColumnDef="{{column.columnDef}}">
+            <!-- <mat-header-cell *cdkHeaderCellDef>{{ column.header }}</mat-header-cell>
+        <mat-cell *cdkCellDef="let row">{{ column.cell(row) }}</mat-cell> -->
+            <th mat-header-cell *matHeaderCellDef>{{ column.header }}</th>
+            <td mat-cell *matCellDef="let row">{{ column.cell(row) }}</td>
+        </ng-container>
+        <!-- <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row> -->
+
+        <!-- <ng-container matColumnDef="header">
+        <th mat-header-cell *matHeaderCellDef="displayedColumns"  style="text-align: left!important;"> 
+        </th>
+      </ng-container>
+      <tr mat-header-row *matHeaderRowDef="['header'];sticky:true"></tr> -->
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns;sticky:true"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+
+    <!-- <table mat-table [dataSource]="dataSourceMain" class="mat-elevation-z8">
+        <ng-container matColumnDef="Position">
+          <th mat-header-cell *matHeaderCellDef> SNo. </th>
+          <td mat-cell *matCellDef="let element;let i = index"> {{i+1}} </td>
+        </ng-container>
+    
+        <ng-container matColumnDef="ST_DATE">
+          <th mat-header-cell *matHeaderCellDef> Start Date </th>
+          <td mat-cell *matCellDef="let element">
+            {{element.ST_DATE}}
+          </td>
+        </ng-container>
+    
+        <ng-container matColumnDef="END_DATE">
+          <th mat-header-cell *matHeaderCellDef> End Date </th>
+          <td mat-cell *matCellDef="let element">
+            {{element.END_DATE}}
+          </td>
+        </ng-container>
+    
+        <ng-container matColumnDef="LIFNR">
+          <th mat-header-cell *matHeaderCellDef> Vendor Code</th>
+          <td mat-cell *matCellDef="let element">
+            {{element.LIFNR}}
+          </td>
+        </ng-container>
+  
+        <ng-container matColumnDef="MATNR">
+          <th mat-header-cell *matHeaderCellDef> Material No.</th>
+          <td mat-cell *matCellDef="let element">
+            {{element.MATNR}}
+          </td>
+        </ng-container>
+  
+        <ng-container matColumnDef="MAKTX">
+          <th mat-header-cell *matHeaderCellDef> Material Desc. </th>
+          <td mat-cell *matCellDef="let element">
+            {{element.MAKTX}}
+          </td>
+        </ng-container>
+      
+        <ng-container matColumnDef="PLNNR">
+          <th mat-header-cell *matHeaderCellDef> Task List grp. </th>
+          <td mat-cell *matCellDef="let element">
+            {{element.PLNNR}}
+          </td>
+        </ng-container>
+    
+        <ng-container matColumnDef="PLNAL">
+          <th mat-header-cell *matHeaderCellDef> Group Counter </th>
+          <td mat-cell *matCellDef="let element">
+            {{element.PLNAL}}
+          </td>
+        </ng-container>
+  
+        <ng-container matColumnDef="VORGLFNR">
+          <th mat-header-cell *matHeaderCellDef> Opn. Code </th>
+          <td mat-cell *matCellDef="let element">
+            {{element.VORGLFNR}}
+          </td>
+        </ng-container>
+    
+        <ng-container matColumnDef="CHAR_ID">
+          <th mat-header-cell *matHeaderCellDef> Char. ID </th>
+          <td mat-cell *matCellDef="let element">
+            {{element.CHAR_ID}}
+          </td>
+        </ng-container>
+    
+        <ng-container matColumnDef="KURZTEXT1">
+          <th mat-header-cell *matHeaderCellDef> Char. Desc </th>
+          <td mat-cell *matCellDef="let element">
+            {{element.KURZTEXT1}}
+          </td>
+        </ng-container>
+  
+        <ng-container matColumnDef="TOLERANZUN">
+          <th mat-header-cell *matHeaderCellDef> LSL </th>
+          <td mat-cell *matCellDef="let element">
+            {{element.TOLERANZUN}}
+          </td>
+        </ng-container>
+  
+        <ng-container matColumnDef="TOLERANZOB">
+          <th mat-header-cell *matHeaderCellDef> USL </th>
+          <td mat-cell *matCellDef="let element">
+            {{element.TOLERANZOB}}
+          </td>
+        </ng-container>
+  
+        <ng-container matColumnDef="MASSEINHSW">
+          <th mat-header-cell *matHeaderCellDef> UOM </th>
+          <td mat-cell *matCellDef="let element">
+            {{element.MASSEINHSW}}
+          </td>
+        </ng-container>
+  
+        <ng-container matColumnDef="MERKGEW_TXT1">
+          <th mat-header-cell *matHeaderCellDef> Critical Category </th>
+          <td mat-cell *matCellDef="let element">
+            {{element.MERKGEW_TXT1}}
+          </td>
+        </ng-container>
+  
+        <ng-container matColumnDef="MERKGEW_TXT4">
+          <th mat-header-cell *matHeaderCellDef> Dim. Category </th>
+          <td mat-cell *matCellDef="let element">
+            {{element.MERKGEW_TXT4}}
+          </td>
+        </ng-container>
+    
+        <ng-container matColumnDef="KEY_FIGURE">
+          <th mat-header-cell *matHeaderCellDef> Key Figure </th>
+          <td mat-cell *matCellDef="let element">
+            {{element.KEY_FIGURE}}
+          </td>
+        </ng-container>
+  
+  
+        <ng-container matColumnDef="MONTH_CP1">
+          <th mat-header-cell *matHeaderCellDef> Month CP1 </th>
+          <td mat-cell *matCellDef="let element">
+            {{element.MONTH_CP1}}
+          </td>
+        </ng-container>
+    
+        <ng-container matColumnDef="MONTH_CPK1">
+          <th mat-header-cell *matHeaderCellDef> Month CPK1 </th>
+          <td mat-cell *matCellDef="let element">
+            {{element.MONTH_CPK1}}
+          </td>
+        </ng-container>
+    
+        <ng-container matColumnDef="MONTH_MEAN1">
+          <th mat-header-cell *matHeaderCellDef> XBAR1 </th>
+          <td mat-cell *matCellDef="let element">
+            {{element.MONTH_MEAN1}}
+          </td>
+        </ng-container>
+  
+        <ng-container matColumnDef="MONTH_VAR1">
+          <th mat-header-cell *matHeaderCellDef> Sigma1 </th>
+          <td mat-cell *matCellDef="let element">
+            {{element.MONTH_VAR1}}
+          </td>
+        </ng-container>
+  
+        <ng-container matColumnDef="MONTH_CP1">
+          <th mat-header-cell *matHeaderCellDef> Month CP1 </th>
+          <td mat-cell *matCellDef="let element">
+            {{element.MONTH_CP1}}
+          </td>
+        </ng-container>
+    
+        <ng-container matColumnDef="MONTH_CPK2">
+          <th mat-header-cell *matHeaderCellDef> Month CPK2 </th>
+          <td mat-cell *matCellDef="let element">
+            {{element.MONTH_CPK2}}
+          </td>
+        </ng-container>
+    
+        <ng-container matColumnDef="MONTH_MEAN2">
+          <th mat-header-cell *matHeaderCellDef> XBAR2 </th>
+          <td mat-cell *matCellDef="let element">
+            {{element.MONTH_MEAN2}}
+          </td>
+        </ng-container>
+  
+        <ng-container matColumnDef="MONTH_VAR2">
+          <th mat-header-cell *matHeaderCellDef> Sigma2 </th>
+          <td mat-cell *matCellDef="let element">
+            {{element.MONTH_VAR2}}
+          </td>
+        </ng-container>
+  
+        <ng-container matColumnDef="MONTH_CP3">
+          <th mat-header-cell *matHeaderCellDef> Month CP3 </th>
+          <td mat-cell *matCellDef="let element">
+            {{element.MONTH_CP3}}
+          </td>
+        </ng-container>
+    
+        <ng-container matColumnDef="MONTH_CPK3">
+          <th mat-header-cell *matHeaderCellDef> Month CPK3</th>
+          <td mat-cell *matCellDef="let element">
+            {{element.MONTH_CPK3}}
+          </td>
+        </ng-container>
+    
+        <ng-container matColumnDef="MONTH_MEAN3">
+          <th mat-header-cell *matHeaderCellDef> XBAR3 </th>
+          <td mat-cell *matCellDef="let element">
+            {{element.MONTH_MEAN3}}
+          </td>
+        </ng-container>
+  
+        <ng-container matColumnDef="MONTH_VAR3">
+          <th mat-header-cell *matHeaderCellDef> Sigma3 </th>
+          <td mat-cell *matCellDef="let element">
+            {{element.MONTH_VAR3}}
+          </td>
+        </ng-container>
+  
+        <ng-container matColumnDef="MONTH_CP4">
+          <th mat-header-cell *matHeaderCellDef> Month CP4 </th>
+          <td mat-cell *matCellDef="let element">
+            {{element.MONTH_CP4}}
+          </td>
+        </ng-container>
+    
+        <ng-container matColumnDef="MONTH_CPK4">
+          <th mat-header-cell *matHeaderCellDef> Month CPK4 </th>
+          <td mat-cell *matCellDef="let element">
+            {{element.MONTH_CPK4}}
+          </td>
+        </ng-container>
+    
+        <ng-container matColumnDef="MONTH_MEAN4">
+          <th mat-header-cell *matHeaderCellDef> XBAR4 </th>
+          <td mat-cell *matCellDef="let element">
+            {{element.MONTH_MEAN4}}
+          </td>
+        </ng-container>
+  
+        <ng-container matColumnDef="MONTH_VAR4">
+          <th mat-header-cell *matHeaderCellDef> Sigma4 </th>
+          <td mat-cell *matCellDef="let element">
+            {{element.MONTH_VAR4}}
+          </td>
+        </ng-container>
+  
+        <ng-container matColumnDef="MONTH_CP5">
+          <th mat-header-cell *matHeaderCellDef> Month CP5 </th>
+          <td mat-cell *matCellDef="let element">
+            {{element.MONTH_CP5}}
+          </td>
+        </ng-container>
+    
+        <ng-container matColumnDef="MONTH_CPK5">
+          <th mat-header-cell *matHeaderCellDef> Month CPK5 </th>
+          <td mat-cell *matCellDef="let element">
+            {{element.MONTH_CPK5}}
+          </td>
+        </ng-container>
+    
+        <ng-container matColumnDef="MONTH_MEAN5">
+          <th mat-header-cell *matHeaderCellDef> XBAR5 </th>
+          <td mat-cell *matCellDef="let element">
+            {{element.MONTH_MEAN5}}
+          </td>
+        </ng-container>
+  
+        <ng-container matColumnDef="MONTH_VAR5">
+          <th mat-header-cell *matHeaderCellDef> Sigma5 </th>
+          <td mat-cell *matCellDef="let element">
+            {{element.MONTH_VAR5}}
+          </td>
+        </ng-container>
+  
+        <ng-container matColumnDef="MONTH_CP6">
+          <th mat-header-cell *matHeaderCellDef> Month CP6 </th>
+          <td mat-cell *matCellDef="let element">
+            {{element.MONTH_CP6}}
+          </td>
+        </ng-container>
+    
+        <ng-container matColumnDef="MONTH_CPK6">
+          <th mat-header-cell *matHeaderCellDef> Month CPK6 </th>
+          <td mat-cell *matCellDef="let element">
+            {{element.MONTH_CPK6}}
+          </td>
+        </ng-container>
+    
+        <ng-container matColumnDef="MONTH_MEAN6">
+          <th mat-header-cell *matHeaderCellDef> XBAR6 </th>
+          <td mat-cell *matCellDef="let element">
+            {{element.MONTH_MEAN6}}
+          </td>
+        </ng-container>
+  
+        <ng-container matColumnDef="MONTH_VAR6">
+          <th mat-header-cell *matHeaderCellDef> Sigma6 </th>
+          <td mat-cell *matCellDef="let element">
+            {{element.MONTH_VAR6}}
+          </td>
+        </ng-container>
+  
+        <ng-container matColumnDef="MONTH_CP7">
+          <th mat-header-cell *matHeaderCellDef> Month CP7 </th>
+          <td mat-cell *matCellDef="let element">
+            {{element.MONTH_CP7}}
+          </td>
+        </ng-container>
+    
+        <ng-container matColumnDef="MONTH_CPK7">
+          <th mat-header-cell *matHeaderCellDef> Month CPK7 </th>
+          <td mat-cell *matCellDef="let element">
+            {{element.MONTH_CPK7}}
+          </td>
+        </ng-container>
+    
+        <ng-container matColumnDef="MONTH_MEAN7">
+          <th mat-header-cell *matHeaderCellDef> XBAR7 </th>
+          <td mat-cell *matCellDef="let element">
+            {{element.MONTH_MEAN7}}
+          </td>
+        </ng-container>
+  
+        <ng-container matColumnDef="MONTH_VAR7">
+          <th mat-header-cell *matHeaderCellDef> Sigma7 </th>
+          <td mat-cell *matCellDef="let element">
+            {{element.MONTH_VAR7}}
+          </td>
+        </ng-container>
+        
+        <ng-container matColumnDef="MONTH_CP8">
+          <th mat-header-cell *matHeaderCellDef> Month CP8 </th>
+          <td mat-cell *matCellDef="let element">
+            {{element.MONTH_CP8}}
+          </td>
+        </ng-container>
+    
+        <ng-container matColumnDef="MONTH_CPK8">
+          <th mat-header-cell *matHeaderCellDef> Month CPK8 </th>
+          <td mat-cell *matCellDef="let element">
+            {{element.MONTH_CPK8}}
+          </td>
+        </ng-container>
+    
+        <ng-container matColumnDef="MONTH_MEAN8">
+          <th mat-header-cell *matHeaderCellDef> XBAR8 </th>
+          <td mat-cell *matCellDef="let element">
+            {{element.MONTH_MEAN8}}
+          </td>
+        </ng-container>
+  
+        <ng-container matColumnDef="MONTH_VAR8">
+          <th mat-header-cell *matHeaderCellDef> Sigma8 </th>
+          <td mat-cell *matCellDef="let element">
+            {{element.MONTH_VAR8}}
+          </td>
+        </ng-container>
+  
+        <ng-container matColumnDef="MONTH_CP9">
+          <th mat-header-cell *matHeaderCellDef> Month CP9 </th>
+          <td mat-cell *matCellDef="let element">
+            {{element.MONTH_CP9}}
+          </td>
+        </ng-container>
+    
+        <ng-container matColumnDef="MONTH_CPK9">
+          <th mat-header-cell *matHeaderCellDef> Month CPK9 </th>
+          <td mat-cell *matCellDef="let element">
+            {{element.MONTH_CPK9}}
+          </td>
+        </ng-container>
+    
+        <ng-container matColumnDef="MONTH_MEAN9">
+          <th mat-header-cell *matHeaderCellDef> XBAR9 </th>
+          <td mat-cell *matCellDef="let element">
+            {{element.MONTH_MEAN9}}
+          </td>
+        </ng-container>
+  
+        <ng-container matColumnDef="MONTH_VAR9">
+          <th mat-header-cell *matHeaderCellDef> Sigma9 </th>
+          <td mat-cell *matCellDef="let element">
+            {{element.MONTH_VAR9}}
+          </td>
+        </ng-container>
+  
+        <ng-container matColumnDef="MONTH_CP10">
+          <th mat-header-cell *matHeaderCellDef> Month CP10 </th>
+          <td mat-cell *matCellDef="let element">
+            {{element.MONTH_CP10}}
+          </td>
+        </ng-container>
+    
+        <ng-container matColumnDef="MONTH_CPK10">
+          <th mat-header-cell *matHeaderCellDef> Month CPK10 </th>
+          <td mat-cell *matCellDef="let element">
+            {{element.MONTH_CPK10}}
+          </td>
+        </ng-container>
+    
+        <ng-container matColumnDef="MONTH_MEAN10">
+          <th mat-header-cell *matHeaderCellDef> XBAR10 </th>
+          <td mat-cell *matCellDef="let element">
+            {{element.MONTH_MEAN10}}
+          </td>
+        </ng-container>
+  
+        <ng-container matColumnDef="MONTH_VAR10">
+          <th mat-header-cell *matHeaderCellDef> Sigma10 </th>
+          <td mat-cell *matCellDef="let element">
+            {{element.MONTH_VAR10}}
+          </td>
+        </ng-container>
+  
+        <ng-container matColumnDef="MONTH_CP11">
+          <th mat-header-cell *matHeaderCellDef> Month CP11 </th>
+          <td mat-cell *matCellDef="let element">
+            {{element.MONTH_CP11}}
+          </td>
+        </ng-container>
+    
+        <ng-container matColumnDef="MONTH_CPK11">
+          <th mat-header-cell *matHeaderCellDef> Month CPK11 </th>
+          <td mat-cell *matCellDef="let element">
+            {{element.MONTH_CPK11}}
+          </td>
+        </ng-container>
+    
+        <ng-container matColumnDef="MONTH_MEAN11">
+          <th mat-header-cell *matHeaderCellDef> XBAR11 </th>
+          <td mat-cell *matCellDef="let element">
+            {{element.MONTH_MEAN11}}
+          </td>
+        </ng-container>
+  
+        <ng-container matColumnDef="MONTH_VAR11">
+          <th mat-header-cell *matHeaderCellDef> Sigma11 </th>
+          <td mat-cell *matCellDef="let element">
+            {{element.MONTH_VAR11}}
+          </td>
+        </ng-container>
+  
+        <ng-container matColumnDef="MONTH_CP12">
+          <th mat-header-cell *matHeaderCellDef> Month CP12 </th>
+          <td mat-cell *matCellDef="let element">
+            {{element.MONTH_CP1}}
+          </td>
+        </ng-container>
+    
+        <ng-container matColumnDef="MONTH_CPK12">
+          <th mat-header-cell *matHeaderCellDef> Month CPK12 </th>
+          <td mat-cell *matCellDef="let element">
+            {{element.MONTH_CPK12}}
+          </td>
+        </ng-container>
+    
+        <ng-container matColumnDef="MONTH_MEAN12">
+          <th mat-header-cell *matHeaderCellDef> XBAR12 </th>
+          <td mat-cell *matCellDef="let element">
+            {{element.MONTH_MEAN12}}
+          </td>
+        </ng-container>
+  
+        <ng-container matColumnDef="MONTH_VAR12">
+          <th mat-header-cell *matHeaderCellDef> Sigma12 </th>
+          <td mat-cell *matCellDef="let element">
+            {{element.MONTH_VAR12}}
+          </td>
+        </ng-container>
+          
+        <ng-container matColumnDef="header">
+          <th mat-header-cell *matHeaderCellDef [attr.colspan]="47" style="text-align: left!important;"> Inspection LOT
+            Details
+          </th>
+        </ng-container>
+        <tr mat-header-row *matHeaderRowDef="['header'];sticky:true"></tr>
+    
+        <tr mat-header-row *matHeaderRowDef="displayedColumns;sticky:true"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      </table> -->
+</div></div></div></div></div>
+<br />

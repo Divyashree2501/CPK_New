@@ -1,0 +1,569 @@
+<div class="scroll">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<nav class="navbar navbar-expand-lg " style="background-color:#40c2ff">
+    <div class="container-fluid">
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo03"
+            aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+
+                <li class="nav-item" style="padding-top:10px;">
+                    <button type="button" style="border-radius:4px"><img src="./assets/tvslogo.png" alt=""
+                            style="width:45px"> </button>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" style="color:white ;font-size:18px;padding-left:500px;">Supplier Contact
+                        Details</a>
+                </li>
+
+            </ul>
+
+            <div class="row">
+
+                <div class="col-lg-4">
+                    <button  (click)="Export()"  class="navButton" > <i class="fa fa-file-excel-o"  style="color:#fff;
+       
+                        padding: 0;
+                        font-size: 18px;
+                       "></i>Excel</button>
+                </div>
+
+                <div class="col-lg-4">
+                    <button type="button" class="navButton"  (click)="logout()" >
+
+                        <i class="fa fa-sign-out" style="color: #fff;
+                     
+                        padding: 0;
+                        font-size: 18px;
+                       "></i>Logout</button>
+
+
+
+                    <!-- <button type="button" class="navButton" routerLink="/home"><i class="fa fa-home" style="color: #fff;
+         
+               padding: 0;
+               font-size: 18px"></i>Home</button> -->
+                </div>
+
+                <div class="col-lg-4">
+
+               
+                </div>
+
+            </div>
+        </div>
+    </div>
+</nav>
+
+<div class="transitCreate">
+    <div class="row mlr-0">
+      <div class="col-lg-12 col-sm-12 col-md-12 col-xs-12 plr-0">
+        <div class="transitCreateTop">
+            <form  [formGroup]="profileForm" >
+                <div class="row">
+                    <div class="col-lg-6">
+                      <div class="row">
+        
+                         <div class="col-lg-3">
+                           
+                          
+                        </div>  
+        
+                        <div class="col-lg-3" >
+                            <div class="row">
+                                <div class="col-lg-4"></div>
+                                <div class="col-lg-8">
+                                    <label class="label" style="margin-top: 24%;">Vendor Code</label>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+        
+                        <div class="col-lg-3" style="margin-top:2.5%">
+                        
+                            <input type="text" class="input-control"  formControlName="VendorId">
+                        
+                        </div>
+                        <div class="col-lg-3" >
+                            <div class="row">
+                                <div class="col-lg-2">
+
+                                </div>
+                                <div class="col-lg-10">
+                                    <div class="row">
+                                        <div class="col-lg-11">
+                                            <label class="label">Vendor Category</label>
+
+                                        </div>
+                                        <div class="col-lg-1">
+
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                            </div>
+                         
+                         
+                        </div>
+                        
+                        
+        
+        
+                      
+                      </div>
+                    </div>
+        
+        
+                    <div class="col-lg-6">
+                      <div class="row">
+        
+                        <div class="col-lg-4">
+                            <mat-form-field    >
+ 
+                                <mat-select  class="input-control" formControlName="VendorCategory"   #select multiple>
+                                  <div class="select-all">
+                                      <mat-checkbox [(ngModel)]="allSelected"
+                                                      [ngModelOptions]="{standalone: true}"
+                                                      (change)="toggleAllSelection()">Select All</mat-checkbox>
+                                  </div>
+                                  <mat-option (click)="optionClick()" *ngFor="let food of vendorCategorydetail" [value]="food.value">
+                                    {{food.viewValue}}
+                                  </mat-option>
+                                </mat-select>
+                              </mat-form-field>
+
+                        </div>
+                        
+        
+                        <div class="col-lg-3" >
+
+                        </div>
+                      
+                        <div class="col-lg-3" style="font-size: 6px;margin-top:2%;">
+                            <button type="submit" class="btn btn-success" (click)='SupplierReport()'>Submit</button>
+
+
+                    
+                        </div>
+                        
+                       
+                        <div class="col-lg-3" style="margin-top:20px">
+        
+
+        
+                        </div>
+                      </div>
+                    </div>
+        
+        
+                  </div>
+
+                
+        
+
+            </form>
+
+
+</div>
+</div>
+ </div>
+</div>
+
+
+
+<div class="d-flex justify-content-center align-items-center" style="padding:10px;">
+
+<div class="example-container" style="overflow-y:auto"  #TABLE #table >
+    <table mat-table [dataSource]="dataSourceMain" class="mat-elevation-z8">
+       
+        <ng-container matColumnDef="id" >
+            <th mat-header-cell *matHeaderCellDef  > SL.No. </th>
+            <td mat-cell *matCellDef="let element;let i = index" > {{i+1}} </td>
+            </ng-container> 
+            
+            <ng-container matColumnDef="VendorID">
+             <th mat-header-cell *matHeaderCellDef>VendorID</th>
+             <td mat-cell *matCellDef="let element"> {{element.VendorID}}
+            </td>      
+               
+           </ng-container>
+           
+         
+           <ng-container matColumnDef="VendorName" >
+            <th mat-header-cell *matHeaderCellDef >VendorName</th>
+            <td mat-cell *matCellDef="let element"> {{element.VendorName}}
+                </td>
+
+          </ng-container>
+          <ng-container matColumnDef="VendorCategory">
+            <th mat-header-cell *matHeaderCellDef  >VendorCategory</th>
+            <td mat-cell *matCellDef="let element"  > 
+              {{element.VendorCategory}}
+            </td>
+
+          </ng-container>
+          <ng-container matColumnDef="ProductionHouse">
+            <th mat-header-cell *matHeaderCellDef >ProductionHouse</th>
+            <td mat-cell *matCellDef="let element" > {{element.ProductionHouse}}
+                </td>
+
+          </ng-container>
+          <ng-container matColumnDef="VendorAddress">
+            <th mat-header-cell *matHeaderCellDef  >VendorAddress</th>
+            <td mat-cell *matCellDef="let element"  > {{element.VendorAddress}} 
+                </td>
+
+          </ng-container>
+          <ng-container matColumnDef="PinCode">
+            <th mat-header-cell *matHeaderCellDef> PinCode</th>
+            <td mat-cell *matCellDef="let element"> 
+                {{element.PinCode}}
+            </td>
+
+
+          </ng-container>
+
+        
+
+          <ng-container matColumnDef="LandlinePhoneNo" sticky>
+            <th mat-header-cell *matHeaderCellDef>LandlinePhoneNo</th>
+            <td mat-cell *matCellDef="let element">{{element.LandlinePhoneNo}}
+            
+          </td> 
+          </ng-container>
+          
+          <ng-container matColumnDef="VCIPAddress">
+            <th mat-header-cell *matHeaderCellDef>VCIPAddress</th>
+            <td mat-cell *matCellDef="let element">   {{element.VCIPAddress}}
+           
+                </td>
+
+          </ng-container>
+          
+         
+         
+          <ng-container matColumnDef="SupplierCEOName" >
+            <th mat-header-cell *matHeaderCellDef>SupplierCEOName</th>
+            <td mat-cell *matCellDef="let element"> {{element.SupplierCEOName}}
+            
+
+          </ng-container>
+
+      
+        <ng-container matColumnDef="SupplierCEOPhoneNo" sticky>
+
+        
+            <th mat-header-cell *matHeaderCellDef>SupplierCEOPhoneNo</th>
+            <td mat-cell *matCellDef="let element"> 
+              {{element.SupplierCEOPhoneNo}}
+            </td>
+          
+       
+        </ng-container>
+
+        <ng-container matColumnDef="SupplierCEOEmailId">
+          <th mat-header-cell *matHeaderCellDef>SupplierCEOEmailId</th>
+          <td mat-cell *matCellDef="let element"> {{element.SupplierCEOEmailId}}
+          
+              </td>
+
+        </ng-container>
+
+
+       
+          <ng-container matColumnDef="BusinessheadName">
+            <th mat-header-cell *matHeaderCellDef>BusinessheadName</th>
+            <td mat-cell *matCellDef="let element"> {{element.BusinessheadName}}
+                </td>
+
+          </ng-container>
+
+          <ng-container matColumnDef="BusinessheadEmailId">
+            <th mat-header-cell *matHeaderCellDef>BusinessheadEmailId</th>
+            <td mat-cell *matCellDef="let element"> {{element.BusinessheadEmailId}}
+                </td>
+
+          </ng-container>
+
+          <ng-container matColumnDef="BusinessheadPhoneNo">
+            <th mat-header-cell *matHeaderCellDef>BusinessheadPhoneNo</th>
+            <td mat-cell *matCellDef="let element"> {{element.BusinessheadPhoneNo}}
+                </td>
+
+          </ng-container>
+
+          <ng-container matColumnDef="PlantheadName" >
+            <th mat-header-cell *matHeaderCellDef>PlantheadName</th>
+            <td mat-cell *matCellDef="let element"> {{element.PlantheadName}}
+                </td>
+
+          </ng-container>
+      
+      
+          <ng-container matColumnDef="PlantheadEmailId">
+            <th mat-header-cell *matHeaderCellDef>PlantheadEmailId</th>
+            <td mat-cell *matCellDef="let element"> {{element.PlantheadEmailId}}
+                </td>
+
+          </ng-container>
+      
+          <ng-container matColumnDef="PlantheadPhoneNo" sticky>
+            <th mat-header-cell *matHeaderCellDef>PlantheadPhoneNo</th>
+            <td mat-cell *matCellDef="let element"> {{element.PlantheadPhoneNo}}
+              
+                </td>
+
+          </ng-container>
+      
+          <!-- <ng-container matColumnDef="QualityheadName">
+            <th mat-header-cell *matHeaderCellDef>QualityheadName</th>
+            <td mat-cell *matCellDef="let element"> {{element.QualityheadName}}
+                </td>
+
+          </ng-container>
+       
+          <ng-container matColumnDef="QualityheadEmailId">
+            <th mat-header-cell *matHeaderCellDef>QualityheadEmailId</th>
+            <td mat-cell *matCellDef="let element"> {{element.QualityheadEmailId}}
+                </td>
+
+          </ng-container>
+
+
+          <ng-container matColumnDef="QualityFirstPhoneNo">
+            <th mat-header-cell *matHeaderCellDef>QualityFirstPhoneNo </th>
+            <td mat-cell *matCellDef="let element"> {{element.QualityFirstPhoneNo}}
+                </td>
+
+          </ng-container> -->
+
+
+          <ng-container matColumnDef="MarketingFirstName">
+
+            <th mat-header-cell *matHeaderCellDef>MarketingFirstName </th>
+
+            <td mat-cell *matCellDef="let element"> {{element.MarketingFirstName}}
+              
+           
+            </td>
+           
+
+          </ng-container>
+
+
+
+          <ng-container matColumnDef="MarketingFirstEmailId" >
+            <th mat-header-cell *matHeaderCellDef>MarketingFirstEmailId</th>
+            <td mat-cell *matCellDef="let element"> {{element.MarketingFirstEmailId}}
+                </td>
+          </ng-container>
+
+
+          <ng-container matColumnDef="MarketingFirstPhoneNo">
+            <th mat-header-cell *matHeaderCellDef>MarketingFirstPhoneNo </th>
+            <td mat-cell *matCellDef="let element">{{element.MarketingFirstPhoneNo}}
+            
+             
+            
+            </td>
+          
+
+          </ng-container>
+
+
+          <ng-container matColumnDef="FinanceFirstName">
+            <th mat-header-cell *matHeaderCellDef>FinanceFirstName </th>
+            <td mat-cell *matCellDef="let element"> {{element.FinanceFirstName}}
+                </td>
+
+          </ng-container>
+          <ng-container matColumnDef="FinanceFirstEmailId" >
+            <th mat-header-cell *matHeaderCellDef >FinanceFirstEmailId</th>
+           
+                <td mat-cell *matCellDef="let element" >   {{element.FinanceFirstEmailId}}
+
+          </ng-container>
+
+          
+         
+
+
+      
+
+          <ng-container matColumnDef="FinanceFirstPhoneNo" >
+            <th mat-header-cell *matHeaderCellDef >FinanceFirstPhoneNo</th>
+            <td mat-cell *matCellDef="let element">{{element.FinanceFirstPhoneNo}}
+                </td>
+
+          </ng-container>
+
+          <ng-container matColumnDef="QualityheadName" >
+            <th mat-header-cell *matHeaderCellDef >QualityheadName</th>
+            <td mat-cell *matCellDef="let element"> {{element.QualityheadName}} 
+                </td>
+
+          </ng-container>
+
+          <ng-container matColumnDef="QualityheadEmailId" >
+            <th mat-header-cell *matHeaderCellDef >QualityheadEmailId</th>
+            <td mat-cell *matCellDef="let element"> {{element.QualityheadEmailId}} 
+                </td>
+
+          </ng-container>
+          <ng-container matColumnDef="QualityheadPhoneNo" >
+            <th mat-header-cell *matHeaderCellDef >QualityheadPhoneNo</th>
+            <td mat-cell *matCellDef="let element"> {{element.QualityheadPhoneNo}} 
+                </td>
+
+          </ng-container>
+
+          <ng-container matColumnDef="QualityFirstheadName" >
+            <th mat-header-cell *matHeaderCellDef >QualityFirstheadName</th>
+            <td mat-cell *matCellDef="let element"> {{element.QualityFirstheadName}} 
+                </td>
+
+          </ng-container>
+
+
+          <ng-container matColumnDef="QualityFirstEmailId" >
+            <th mat-header-cell *matHeaderCellDef >QualityFirstEmailId</th>
+            <td mat-cell *matCellDef="let element">{{element.QualityFirstEmailId}}
+                </td>
+
+          </ng-container>
+
+          <ng-container matColumnDef="QualityFirstPhoneNo">
+            <th mat-header-cell *matHeaderCellDef>QualityFirstPhoneNo</th>
+           
+         
+            <td mat-cell *matCellDef="let element">{{element.QualityFirstPhoneNo}}
+              
+                </td> 
+
+          </ng-container>
+
+
+          
+          <ng-container matColumnDef="NPDHeadName" >
+            <th mat-header-cell *matHeaderCellDef >NPDHeadName</th>
+            <td mat-cell *matCellDef="let element"> {{element.NPDHeadName}} 
+                </td>
+
+          </ng-container>
+
+          <ng-container matColumnDef="NPDHeadEmailId" >
+            <th mat-header-cell *matHeaderCellDef >NPDHeadEmailId</th>
+            <td mat-cell *matCellDef="let element"> {{element.NPDHeadEmailId}} 
+                </td>
+
+          </ng-container>
+          <ng-container matColumnDef="NPDHeadPhoneNo" >
+            <th mat-header-cell *matHeaderCellDef >NPDHeadPhoneNo</th>
+            <td mat-cell *matCellDef="let element"> {{element.NPDHeadPhoneNo}} 
+                </td>
+
+          </ng-container>
+
+          <ng-container matColumnDef="HeadERMName" >
+            <th mat-header-cell *matHeaderCellDef >HeadERMName</th>
+            <td mat-cell *matCellDef="let element"> {{element.HeadERMName}} 
+                </td>
+
+          </ng-container>
+
+          <ng-container matColumnDef="HeadERMEmailId" >
+            <th mat-header-cell *matHeaderCellDef >HeadERMEmailId</th>
+            <td mat-cell *matCellDef="let element"> {{element.HeadERMEmailId}} 
+                </td>
+
+          </ng-container>
+
+          
+
+          <ng-container matColumnDef="HeadERMPhoneNo" >
+            <th mat-header-cell *matHeaderCellDef >HeadERMPhoneNo</th>
+            <td mat-cell *matCellDef="let element"> {{element.HeadERMPhoneNo}} 
+                </td>
+
+          </ng-container>
+
+          <ng-container matColumnDef="ITHeadName" >
+            <th mat-header-cell *matHeaderCellDef >ITHeadName</th>
+            <td mat-cell *matCellDef="let element"> {{element.ITHeadName}} 
+                </td>
+
+          </ng-container>
+
+          <ng-container matColumnDef="ITHeadPhoneNo" >
+            <th mat-header-cell *matHeaderCellDef >ITHeadPhoneNo</th>
+            <td mat-cell *matCellDef="let element"> {{element.ITHeadPhoneNo}} 
+                </td>
+
+          </ng-container>
+
+          <ng-container matColumnDef="ITHeadEmailId" >
+            <th mat-header-cell *matHeaderCellDef >ITHeadEmailId</th>
+            <td mat-cell *matCellDef="let element"> {{element.ITHeadEmailId}} 
+                </td>
+
+          </ng-container>
+
+          <ng-container matColumnDef="SavedOn" >
+            <th mat-header-cell *matHeaderCellDef >SavedOn</th>
+            <td mat-cell *matCellDef="let element"> {{element.SavedOn}} 
+                </td>
+
+          </ng-container>
+          <ng-container matColumnDef="ModifiedOn" >
+            <th mat-header-cell *matHeaderCellDef >ModifiedOn</th>
+            <td mat-cell *matCellDef="let element"> {{element.ModifiedOn}} 
+                </td>
+
+          </ng-container>
+          <ng-container matColumnDef="DispatchFirstName" >
+            <th mat-header-cell *matHeaderCellDef >DispatchFirstName</th>
+            <td mat-cell *matCellDef="let element"> {{element.DispatchFirstName}} 
+                </td>
+
+          </ng-container>
+
+          <ng-container matColumnDef="DispatchFirstEmailId" >
+            <th mat-header-cell *matHeaderCellDef >DispatchFirstEmailId</th>
+            <td mat-cell *matCellDef="let element"> {{element.DispatchFirstEmailId}} 
+                </td>
+
+          </ng-container>
+
+          <ng-container matColumnDef="DispatchFirstPhoneNo" >
+            <th mat-header-cell *matHeaderCellDef >DispatchFirstPhoneNo</th>
+            <td mat-cell *matCellDef="let element"> {{element.DispatchFirstPhoneNo}} 
+                </td>
+
+          </ng-container>
+
+
+
+
+         
+          
+         
+          
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumnheader;sticky:true"></tr>
+
+        <tr mat-row *matRowDef="let row; columns: displayedColumnheader;"></tr>
+
+
+    </table>
+
+
+</div>     
+</div>   
+</div>    

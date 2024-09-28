@@ -1,0 +1,95 @@
+<!-- <nav class="navbar navbar-expand-lg " style="background-color:#40c2ff">
+    <div class="container-fluid">
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo03"
+            aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+
+                <li class="nav-item" style="padding-top:10px;">
+                    <button type="button" style="border-radius:4px"><img src="./assets/tvslogo.png" alt=""
+                            style="width:45px"> </button>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" style="color:white ;font-size:18px;padding-left:500px;">Supplier Contact
+                        Details</a>
+                </li>
+
+            </ul>
+
+            <div class="row">
+
+                <div class="col-lg-4"></div>
+
+                
+
+                <div class="col-lg-4">
+
+               
+                </div>
+
+            </div>
+        </div>
+    </div>
+</nav> -->
+<div class="bg"  >
+<form [formGroup]="profileForm">
+
+    <div class="d-flex justify-content-center"> 
+      
+     
+        
+            
+         
+            <div class="card-body" class="main-container">
+                <div class="center-position" style="position: relative;">
+                    <div class="field-container">
+                    <div  class="user-background">
+                        <img  
+                       src="assets/login-user.png"></div>
+    
+
+              <div class="card cascading-right" style="
+                background: hsla(0, 0%, 100%, 0.55);
+                backdrop-filter: blur(30px);width: 98%;
+                ">
+                 <div class="row">
+                  
+                    <div  class="login-input-section input">
+                        <input type="text" formControlName="VCode" class="form-control" placeholder="VendorId"
+                            autocomplete="off" required>
+                       
+                    </div><br>
+                    <div class="login-input-section input">
+                        <input type="password" formControlName="password" class="form-control"
+                            placeholder="Password" autocomplete="off" required>
+                      
+                    </div>
+                <div ><br>
+                    <div class="d-flex justify-content-center"> 
+                    <button type="submit" class="btn btn-primary" 
+                    (click)='home()'  >Login</button><br><br></div><br>
+
+                </div>
+                    
+
+            
+            </div>
+
+             
+            </div>
+          </div></div></div>
+   
+   
+    
+   
+
+</div>
+</form>
+</div>
+
+
+

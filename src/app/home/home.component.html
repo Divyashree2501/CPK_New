@@ -1,0 +1,88 @@
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<nav class="navbar navbar-expand-lg " style="background-color: #3f51b5">
+  <div class="container-fluid">
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+  
+    <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        
+        <li class="nav-item" style="padding-top:10px;">
+        
+            <button type="button" style="border-radius:4px"
+             ><img src="./assets/tvslogo.png" alt="" style="width:45px">  </button>
+         
+        </li> 
+         
+        <li class="nav-item" >
+          <a class="nav-link" style="color:white ;font-size:18px;padding-left:500px;">Supplier CPK</a>    
+        </li>
+      
+      </ul>
+      
+      <div class="row">
+       
+        <div class="col-lg-4"></div>
+ 
+          <div class="col-lg-4" >
+            <!-- <a href="#" class="nav-item nav-link active"><i class="fa fa-home"></i><span>Home</span></a> -->
+            <button type="button" class="navButton" routerLink="/home"
+             ><i class="fa fa-home" style="color: #fff;
+       
+             padding: 0;
+             font-size: 18px"></i>Home</button>
+          </div>
+          
+      <div class="col-lg-4" >
+        
+        <button type="button" class="navButton" routerLink="/vlogin"
+         ><i class="fa fa-sign-out"  style="color: #fff;
+       
+         padding: 0;
+         font-size: 18px;
+        "></i>Logout</button>
+      </div>
+
+        </div>
+     
+
+      
+     
+    
+      
+      
+    </div>
+  </div>
+</nav>
+ 
+ 
+
+
+
+
+<div class="row" style="margin-bottom:10px;
+margin-top:10%" >
+<div class="col">
+  <div class="card"><br>
+      <input type="image"  style="border: blue;"  src="./assets/file.png"   width="130" height="110"  (click)='DataEntry1()'><br>
+      <h6 style="font-weight: 700;font-size:14px">Data Entry</h6>
+  </div>
+</div>
+  <div class="col">
+      <div class="card"><br>
+          <input type="image"  style="border: blue;" src="./assets/calendar.png" width="130" height="110" (click)='DailyReport()' ><br>
+          <h6 style="font-weight: 700;font-size:14px">Daily Report</h6>
+      </div>
+  </div>
+  <div class="col">
+    <div class="card"><br>
+        <input type="image"  style="border: blue;"  src="./assets/profit.png" width="130" height="110"   (click)='MonthlyReport()'><br>
+        <h6 style="font-weight: 700;font-size:14px">Monthly Report</h6>
+    </div>
+</div>
+
+  </div>
+
+
+     
